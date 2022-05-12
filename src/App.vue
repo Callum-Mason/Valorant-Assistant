@@ -1,32 +1,42 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      class="pt-4"
+      color="grey lighten-3"
+      mini-variant
+    >
+      <!-- -->
+
+      <nav>
+        <router-link to="/">Home</router-link>
+        <br />
+        <router-link to="/about">About</router-link>
+      </nav>
+    </v-navigation-drawer>
+
+    <!-- Sizes your content based upon application components -->
+    <v-main>
+      <!-- Provides the application the proper gutter -->
+      <v-container fluid>
+        <!-- If using vue-router -->
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+
+    <v-footer padless app>
+    <v-col
+      class="text-center"
+      cols="12"
+    >
+      {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+    </v-col>
+  </v-footer>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<style >
 
-nav {
-  padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
