@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-navigation-drawer permanent app class="pt-4" color="grey lighten-3">
+  <v-app >
+    <v-navigation-drawer permanent app class="pt-4" color="lighten-3">
       <!-- -->
 
       <v-list-item>
@@ -30,15 +30,15 @@
     </v-navigation-drawer>
 
     <!-- Sizes your content based upon application components -->
-    <v-main>
+    <v-main app>
       <!-- Provides the application the proper gutter -->
-      <v-container fluid>
+      <v-container fluid >
         <!-- If using vue-router -->
         <router-view></router-view>
       </v-container>
     </v-main>
 
-    <v-footer padless app>
+    <v-footer padless app >
       <v-col class="text-center" cols="12">
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
       </v-col>
