@@ -1,5 +1,5 @@
 <template>
-  <v-app >
+  <v-app>
     <v-navigation-drawer permanent app class="pt-4" color="lighten-3">
       <!-- -->
 
@@ -32,15 +32,15 @@
     <!-- Sizes your content based upon application components -->
     <v-main app>
       <!-- Provides the application the proper gutter -->
-      <v-container fluid >
+      <v-container fluid>
         <!-- If using vue-router -->
         <router-view></router-view>
       </v-container>
     </v-main>
 
-    <v-footer padless app >
+    <v-footer padless app>
       <v-col class="text-center" cols="12">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        {{ new Date().getFullYear() }} — <strong>Callum Mason</strong>
       </v-col>
     </v-footer>
   </v-app>
@@ -51,6 +51,7 @@
 
 
 <script>
+import { appWindow, PhysicalSize } from "@tauri-apps/api/window";
 export default {
   data() {
     return {
@@ -61,6 +62,46 @@ export default {
       ],
       right: null,
     };
+  },
+  beforeMount() {
+    if (JSON.parse(localStorage.getItem("config")) != null) {
+      let resolution = JSON.parse(localStorage.getItem("config")).resolution;
+      console.log(JSON.parse(localStorage.getItem("config")));
+      appWindow.setSize(
+        new PhysicalSize(
+          parseInt(resolution.split("x")[0]),
+          parseInt(resolution.split("x")[1])
+        )
+      );
+      appWindow.isResizable = JSON.parse(localStorage.getItem("config")).isResizable;
+      console.log(JSON.parse(localStorage.getItem("config")).DarkTheme);
+      if (JSON.parse(localStorage.getItem("config")).DarkTheme) {
+        // this.DarkTheme = true;
+        this.$vuetify.theme.dark = true;
+      }else{
+        // this.DarkTheme = false;
+        this.$vuetify.theme.dark = false;
+      }
+
+
+
+      // appWindow.isResizable = false;
+    } else {
+      let resolution = "1280x720";
+      appWindow.setSize(
+        new PhysicalSize(
+          parseInt(resolution.split("x")[0]),
+          parseInt(resolution.split("x")[1])
+        )
+      );
+      console.log("Default resolution");
+
+      //Used for the Error Toast
+
+      this.snackbartext = "Error: No Configuration Found, creating a new one";
+      localStorage.setItem('config', JSON.stringify({resolution:"1280x720",DarkTheme:true, isResizable:false}));
+      this.snackbar = true;
+    }
   },
 };
 </script>

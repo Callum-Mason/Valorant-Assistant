@@ -59,12 +59,13 @@ export default {
     },
     GetResolution(){
       // console.log(localStorage.getItem("resolution"));
-      if(localStorage.getItem("resolution") != null){
-        this.resolution = localStorage.getItem("resolution");
+      if(JSON.parse(localStorage.getItem('config')).resolution != null){
+        this.resolution = JSON.parse(localStorage.getItem('config')).resolution;
+        console.log(JSON.parse(localStorage.getItem('config')));
         // console.log("Got from localStorage");
       }else{
         this.resolution = "1280x720";
-        // console.log("Default resolution");
+        console.log("Default resolution");
         this.ChangeResolution();
 
         //Used for the Error Toast
@@ -75,8 +76,11 @@ export default {
 
     },
     StoreResolution(){
-      // console.log("Stored " + this.resolution);
-      localStorage.setItem("resolution", this.resolution);
+      var config = JSON.parse(localStorage.getItem('config'));
+      config.resolution = this.resolution;
+      localStorage.setItem('config', JSON.stringify(config));
+      // console.log(localStorage.getItem('config'));
+
     },
   },
   beforeMount(){
