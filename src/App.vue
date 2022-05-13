@@ -66,7 +66,7 @@ export default {
   beforeMount() {
     if (JSON.parse(localStorage.getItem("config")) != null) {
       let resolution = JSON.parse(localStorage.getItem("config")).resolution;
-      console.log(JSON.parse(localStorage.getItem("config")));
+      // console.log(JSON.parse(localStorage.getItem("config")));
       appWindow.setSize(
         new PhysicalSize(
           parseInt(resolution.split("x")[0]),
@@ -74,7 +74,7 @@ export default {
         )
       );
       appWindow.isResizable = JSON.parse(localStorage.getItem("config")).isResizable;
-      console.log(JSON.parse(localStorage.getItem("config")).DarkTheme);
+      // console.log(JSON.parse(localStorage.getItem("config")).DarkTheme);
       if (JSON.parse(localStorage.getItem("config")).DarkTheme) {
         // this.DarkTheme = true;
         this.$vuetify.theme.dark = true;
@@ -99,7 +99,7 @@ export default {
       //Used for the Error Toast
 
       this.snackbartext = "Error: No Configuration Found, creating a new one";
-      localStorage.setItem('config', JSON.stringify({resolution:"1280x720",DarkTheme:true, isResizable:false}));
+      localStorage.setItem('config', JSON.stringify({resolution:"1280x720",theme:{name:"Dark", custom: ""}, isResizable:false}));
       this.snackbar = true;
     }
   },

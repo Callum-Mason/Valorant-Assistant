@@ -61,7 +61,7 @@ export default {
       // console.log(localStorage.getItem("resolution"));
       if(JSON.parse(localStorage.getItem('config')).resolution != null){
         this.resolution = JSON.parse(localStorage.getItem('config')).resolution;
-        console.log(JSON.parse(localStorage.getItem('config')));
+        // console.log(JSON.parse(localStorage.getItem('config')));
         // console.log("Got from localStorage");
       }else{
         this.resolution = "1280x720";
