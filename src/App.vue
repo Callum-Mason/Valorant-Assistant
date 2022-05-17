@@ -52,6 +52,10 @@
 
 <script>
 import { appWindow, PhysicalSize } from "@tauri-apps/api/window";
+import  setup from "/src/api/index.js";
+
+
+
 export default {
   data() {
     return {
@@ -64,6 +68,10 @@ export default {
     };
   },
   beforeMount() {
+
+    setup()
+
+
     if (JSON.parse(localStorage.getItem("config")) != null) {
       let resolution = JSON.parse(localStorage.getItem("config")).resolution;
       // console.log(JSON.parse(localStorage.getItem("config")));
@@ -73,17 +81,21 @@ export default {
           parseInt(resolution.split("x")[1])
         )
       );
-      appWindow.isResizable = JSON.parse(localStorage.getItem("config")).isResizable;
+      appWindow.isResizable = JSON.parse(
+        localStorage.getItem("config")
+      ).isResizable;
       // console.log(JSON.parse(localStorage.getItem("config")).DarkTheme);
-      if (JSON.parse(localStorage.getItem("config")).DarkTheme) {
-        // this.DarkTheme = true;
-        this.$vuetify.theme.dark = true;
-      }else{
-        // this.DarkTheme = false;
-        this.$vuetify.theme.dark = false;
+      switch (JSON.parse(localStorage.getItem("config")).theme) {
+        case "Light":
+          //set darkmode
+          this.$vuetify.theme.dark = false;
+          break;
+        case "Dark":
+          this.$vuetify.theme.dark = true;
+          break;
+        case "Custom":
+          break;
       }
-
-
 
       // appWindow.isResizable = false;
     } else {
@@ -94,12 +106,20 @@ export default {
           parseInt(resolution.split("x")[1])
         )
       );
-      console.log("Default resolution");
+      this.$vuetify.theme.dark = true;
 
       //Used for the Error Toast
 
       this.snackbartext = "Error: No Configuration Found, creating a new one";
-      localStorage.setItem('config', JSON.stringify({resolution:"1280x720",theme:{name:"Dark", custom: ""}, isResizable:false}));
+      localStorage.setItem(
+        "config",
+        JSON.stringify({
+          resolution: "1280x720",
+          theme: "Dark",
+          isResizable: false,
+        })
+      );
+      console.log("Default Configuration");
       this.snackbar = true;
     }
   },
