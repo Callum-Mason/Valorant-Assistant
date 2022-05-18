@@ -9,8 +9,6 @@ var {
 // var lockFilePassword = "";
 // var lockFileprotocol = "";
 
-
-
 async function setup() {
 
 	await getLockFile().then(function (data) {

@@ -76,11 +76,11 @@ export default {
   methods: {
     increment() {
       this.count++;
-      console.log(this.count);
+      // console.log(this.count);
     },
     decrement() {
       this.count--;
-      console.log(this.count);
+      // console.log(this.count);
     },
   },
   mounted() {

@@ -5,8 +5,8 @@
 
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="text-h6"> Application </v-list-item-title>
-          <v-list-item-subtitle> subtext </v-list-item-subtitle>
+          <v-list-item-title class="text-h6"> Valorant Assistant </v-list-item-title>
+          <v-list-item-subtitle> Version: {{version}} </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -51,10 +51,9 @@
 
 
 <script>
+import setup from "/src/api/index.js";
 import { appWindow, PhysicalSize } from "@tauri-apps/api/window";
-import  setup from "/src/api/index.js";
-
-
+import { CheckLockFile } from "/src/js/PreFlight.js";
 
 export default {
   data() {
@@ -65,13 +64,11 @@ export default {
         { title: "Settings", icon: "mdi-cog-outline", Link: "/settings" },
       ],
       right: null,
+      version: "0.0.1",
     };
   },
-  beforeMount() {
-
-    setup()
-
-
+  methods: {},
+  async beforeMount() {
     if (JSON.parse(localStorage.getItem("config")) != null) {
       let resolution = JSON.parse(localStorage.getItem("config")).resolution;
       // console.log(JSON.parse(localStorage.getItem("config")));
@@ -107,10 +104,6 @@ export default {
         )
       );
       this.$vuetify.theme.dark = true;
-
-      //Used for the Error Toast
-
-      this.snackbartext = "Error: No Configuration Found, creating a new one";
       localStorage.setItem(
         "config",
         JSON.stringify({
@@ -120,8 +113,17 @@ export default {
         })
       );
       console.log("Default Configuration");
-      this.snackbar = true;
     }
+    // console.log("Setup completed");
+
+    await CheckLockFile().then(function (data) {
+      if (data) {
+        console.log("Lock file found");
+        setup().then(() => {});
+      } else {
+        console.log("Lock file not found");
+      }
+    });
   },
 };
 </script>

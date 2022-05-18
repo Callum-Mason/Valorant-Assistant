@@ -13,7 +13,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "com.masons.valorant.assistant",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -25,7 +25,7 @@
       "externalBin": [],
       "copyright": "",
       "category": "DeveloperTool",
-      "shortDescription": "",
+      "shortDescription": "A tool to help you with Valorant",
       "longDescription": "",
       "deb": {
         "depends": []
@@ -47,11 +47,14 @@
       "active": false
     },
     "allowlist": {
-      "all": true
+      "all": true,
+      "fs": {
+        "scope": ["$LOCALDATA"]
+      }
     },
     "windows": [
       {
-        "title": "Valorant Assistent",
+        "title": "Valorant Assistant",
         "width": 1280,
         "height": 720,
         "resizable": false,
