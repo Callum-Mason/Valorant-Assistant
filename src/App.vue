@@ -69,6 +69,7 @@ export default {
   },
   methods: {},
   async beforeMount() {
+    setup()
     if (JSON.parse(localStorage.getItem("config")) != null) {
       let resolution = JSON.parse(localStorage.getItem("config")).resolution;
       // console.log(JSON.parse(localStorage.getItem("config")));

@@ -49,8 +49,10 @@
     "allowlist": {
       "all": true,
       "fs": {
-        "scope": ["$LOCALDATA"]
-      }
+        "readFile": true,
+        "writeFile": true,
+        "scope": ["$LOCALDATA/Riot Games/Riot Client/Config/lockfile"]
+    }
     },
     "windows": [
       {
